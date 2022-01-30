@@ -9,12 +9,14 @@ $bcomment = $_POST['bcomment'];
 
 // 2. DB接続します
 //tryして成功すればcatch,失敗すればexit.。
-try {
-  //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=nishinosaigon3_gs_db;charset=utf8;host=mysql57.nishinosaigon3.sakura.ne.jp','nishinosaigon3','MC980128');
-} catch (PDOException $e) {
-  exit('DBConnectError:'.$e->getMessage());
-}
+// try {
+//   //Password:MAMP='root',XAMPP=''
+//   $pdo = new PDO('mysql:dbname=nishinosaigon3_gs_db;charset=utf8;host=mysql57.nishinosaigon3.sakura.ne.jp','nishinosaigon3','MC980128');
+// } catch (PDOException $e) {
+//   exit('DBConnectError:'.$e->getMessage());
+// }
+require_once('funcs.php');
+$pdo = db_conn();
 
 
 // ３．SQL文を用意(データ登録：INSERT)
@@ -30,13 +32,28 @@ $stmt->bindValue(':bcomment', $bcomment, PDO::PARAM_STR);  //Integer（数値の
 // 5. 実行
 $status = $stmt->execute();
 
-// 6．データ登録処理後
+// // 6．データ登録処理後
+// if($status==false){
+//   //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
+// //   $error = $stmt->errorInfo();
+// //   exit("ErrorMassage:".$error[2]);
+// // }else{
+//   function sql_error($stmt){
+//     $error = $stmt->errorInfo();
+//     exit("SQLError:" . print_r($error, true));
+
+//   //５．index.phpへリダイレクト
+//   header('Location: index.php');
+// }
+//6．データ登録処理後
 if($status==false){
   //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
-  $error = $stmt->errorInfo();
-  exit("ErrorMassage:".$error[2]);
+  //以下を関数化
+sql_error($stmt);
+
 }else{
   //５．index.phpへリダイレクト
-  header('Location: index.php');
+  //以下を関数化
+  redirect('index.php');
 }
 ?>

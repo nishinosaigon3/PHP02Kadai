@@ -20,6 +20,7 @@
 
 <!-- Main[Start] -->
 <form method="post" action="insert.php">
+
   <div class="jumbotron">
    <fieldset>
      
