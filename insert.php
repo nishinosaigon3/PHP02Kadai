@@ -9,14 +9,14 @@ $bcomment = $_POST['bcomment'];
 
 // 2. DB接続します
 //tryして成功すればcatch,失敗すればexit.。
-// try {
-//   //Password:MAMP='root',XAMPP=''
-//   $pdo = new PDO('mysql:dbname=nishinosaigon3_gs_db;charset=utf8;host=mysql57.nishinosaigon3.sakura.ne.jp','nishinosaigon3','MC980128');
-// } catch (PDOException $e) {
-//   exit('DBConnectError:'.$e->getMessage());
-// }
-require_once('funcs.php');
-$pdo = db_conn();
+try {
+  //Password:MAMP='root',XAMPP=''
+  $pdo = new PDO('mysql:dbname=nishinosaigon3_gs_db;charset=utf8;host=mysql57.nishinosaigon3.sakura.ne.jp','nishinosaigon3','MC980128');
+} catch (PDOException $e) {
+  exit('DBConnectError:'.$e->getMessage());
+}
+// require_once('funcs.php');
+// $pdo = db_conn();
 
 
 // ３．SQL文を用意(データ登録：INSERT)
